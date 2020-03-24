@@ -14,7 +14,7 @@ sudo apt install jq
 - Uso:
 
 ```
-$ chmod +x noticia_oficial_Sespa_covid.sh
+$ chmod +x noticia_oficial_Ministerio_da_Saude.sh
 $ ./noticia_oficial_Ministerio_da_Saude.sh
 ```
 

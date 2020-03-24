@@ -15,7 +15,7 @@ sudo apt install jq
 
 ```
 $ chmod +x noticia_oficial_Sespa_covid.sh
-$ ./noticia_oficial_Sespa_covid.sh
+$ ./noticia_oficial_Ministerio_da_Saude.sh
 ```
 
 ![](./imagem.png)

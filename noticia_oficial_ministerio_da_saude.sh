@@ -5,17 +5,28 @@
 # Autor: Marlen Souza
 #
 # Descrição: Selecionar links de fonte oficial do Ministério da Saúde.
-#            
+#
 #
 # Criado: 23/03/2020
 #
 
-# Função responsável por acessar site do Ministério da Saúde via CURL no Endereço www.saude.gov.br e filtrar conteúdo via expressão regular.
+
+# Função responsável por acessar site da Ministério da saúde via CURL no Endereço www.saude.gov.br.
+func_curl_sespa(){
+
+    curl -s https://www.saude.gov.br/noticias/agencia-saude?start=[0-9]+
+
+}
+
+var_func_curl_sespa=$(func_curl_sespa)
+
+
+# Função responsável por filtrar conteúdo via expressão regular.
 # Exbindo as 100 notícias mais recentes.
 
 func_ministerio_da_saude(){
 
-    curl -s https://www.saude.gov.br/noticias/agencia-saude?start=[0-9]{+} | egrep "\/noticias\/agencia-saude\/" | tr -d "\t" | sed "s/^ *//" | tac
+    echo "$var_func_curl_sespa" | egrep "\/noticias\/agencia-saude\/" | tr -d "\t" | sed "s/^ *//" | tac
 
 }
 
@@ -106,7 +117,7 @@ $var_func_dado_brasil
 func_titulo_materia
 
 echo -n "
- Quanto maior o valor de índice, 
+ Quanto maior o valor de índice,
  mais recente é a notícia.
 
 Digite o número da notícia: "
@@ -116,6 +127,12 @@ read numero
 
 # Gera link da notícia
 link_noticia=$(echo "$var_func_endpoint" | egrep "^$numero=" | sed "s/^$numero=//")
+
+# Exibe link selecionado no menu.
+echo "
+Link da notícia selecionada:
+https://www.saude.gov.br$link_noticia
+"
 
 # Executa navegador para acessar link contido na váriavel de ambiente "https://www.saude.gov.br$link_noticia". O navegador pode ser
 # alterado por qualquer outro, bastando assim substituir a "google-chrome" por qualquer outro navegador.

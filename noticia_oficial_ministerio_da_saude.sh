@@ -117,10 +117,10 @@ $var_func_dado_brasil
 func_titulo_materia
 
 echo -n "
- Quanto maior o valor de índice,
- mais recente é a notícia.
+Quanto maior o valor de índice,
+mais recente é a notícia.
 
-Digite o número da notícia: "
+Digite o número da notícia ou 0 para sair: "
 
 # Recebe a opção/número e instância a variável número
 read numero
@@ -139,7 +139,16 @@ https://www.saude.gov.br$link_noticia
 
 linhas=$(func_num_linhas)
 
-if test "$numero" -gt "$linhas" || test "$numero" -le 0
+if test "$numero" -eq 0
+then
+   echo -e \
+   "
+    Não esqueça
+   \e[44;31;5m #FicaEmCasa \e[0m
+
+   "
+  exit 0
+elif test "$numero" -gt "$linhas" || test "$numero" -lt 0
 then
   echo "opção não existe!"
 else
@@ -154,5 +163,13 @@ do
   # Executa função func_main() suprimindo saídas de erro com o "2>&-"
   func_main 2>&-
   read -p "Deseja continuar (s/n)? "
-  [[ ${REPLY^} == N ]] && exit
+  [[ ${REPLY^} == N ]] && \
+  \echo -e \
+   "
+    Não esqueça
+   \e[44;31;5m #FicaEmCasa \e[0m
+
+
+   " && \
+  exit
 done
